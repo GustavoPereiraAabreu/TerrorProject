@@ -17,5 +17,6 @@ public class Interaction : MonoBehaviour
     {
         if(!Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out _target))
             return;
+        // O raycast bateu em algo
     }
 }
