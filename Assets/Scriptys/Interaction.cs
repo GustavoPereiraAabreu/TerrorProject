@@ -9,7 +9,7 @@ public class Interaction : MonoBehaviour
     void Start()
     {
         _mainCam = Camera.main;
-
+        
     }
 
     // Update is called once per frame
@@ -19,4 +19,12 @@ public class Interaction : MonoBehaviour
             return;
         // O raycast bateu em algo
     }
+
+    public void OnInteract()
+    {
+        if(_target.collider == null)
+          return;
+    }
+
+
 }
