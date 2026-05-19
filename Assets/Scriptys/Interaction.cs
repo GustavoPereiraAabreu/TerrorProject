@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
@@ -22,8 +23,12 @@ public class Interaction : MonoBehaviour
 
     public void OnInteract()
     {
-        if(_target.collider == null)
-          return;
+        if(_target.collider == null) //NullCheck, para evitar erros
+            return;
+        if (!_target.collider.TryGetComponent(out IInteractable interactable))
+            return;
+
+        interactable.Interact();
     }
 
 
