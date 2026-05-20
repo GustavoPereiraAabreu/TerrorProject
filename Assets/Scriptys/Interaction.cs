@@ -5,7 +5,7 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] private float _interactionDistance = 2.5f;
     private Camera _mainCam;
-    private II _target; //Objeto alvo do raycast
+    private IInteractable _target; //Objeto alvo do raycast
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
