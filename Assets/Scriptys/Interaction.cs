@@ -5,7 +5,7 @@ public class Interaction : MonoBehaviour
 {
     [SerializeField] private float _interactionDistance = 2.5f;
     private Camera _mainCam;
-    private RaycastHit _target; //Objeto alvo do raycast
+    private II _target; //Objeto alvo do raycast
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,20 +17,32 @@ public class Interaction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out _target, _interactionDistance))
-            return;
-        // O raycast bateu em algo
+        if (!Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out RaycastHit hit, _target, _interactionDistance))
+        {
+            // O raycast bateu em algo
+
+            if (hit.collider.TryGetComponent(out IInteractable interactable))
+            {
+                if (_target == interactable)
+                    return;
+                _target = interactable;
+                _target.ShowOutline();
+            }
+
+            else
+            {
+                _target?.HideOutline();
+                _target = null;
+            }
+        }
     }
 
-    public void OnInteract()
+    public void OnInteract(InputValue value)
     {
-        if(_target.collider == null) //NullCheck, para evitar erros
-            return;
-        if (!_target.collider.TryGetComponent(out IInteractable interactable))
+        if (_target == null)//nullcheck
             return;
 
-        interactable.Interact();
+       _target.Interact();
     }
-
 
 }
