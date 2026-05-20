@@ -8,7 +8,7 @@ public class TV : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (_videoContainer.isPlaying)
+        if (_videoPlayer.isPlaying)
         {
             _videoPlayer.Stop();
             _videoContainer.SetActive(false);
