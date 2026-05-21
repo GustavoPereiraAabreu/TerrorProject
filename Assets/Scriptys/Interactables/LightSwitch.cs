@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Outline))]
+
 public class LightSwitch : MonoBehaviour, IInteractable
 {
     [SerializeField] private bool _isOn;
@@ -11,6 +13,7 @@ public class LightSwitch : MonoBehaviour, IInteractable
     private void Start()
     {
         _outline = GetComponentInChildren<Outline>();
+        _outline.enabled = false;
     }
 
     public void HideOutline()
