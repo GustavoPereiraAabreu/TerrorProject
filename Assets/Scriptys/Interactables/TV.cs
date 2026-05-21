@@ -1,52 +1,46 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class TV : MonoBehaviour, IInteractable
 {
-    private VideoPlayer _videoPlayer;
-    private GameObject _videoContainer;
-    private Outline _outline;
-
-    public void Interact()
-    {
-        if (_videoPlayer.isPlaying)
-        {
-            _videoPlayer.Stop();
-            _videoContainer.SetActive(false);
-        }
-        else
-        {
-            _videoContainer.SetActive(true);
-            _videoPlayer.Play();
-        }
-
-    }
+    private VideoPlayer _VideoPlayer;
+    private GameObject _VideoContainer;
+    private Outline _Outline;
 
     public void HideOutline()
     {
-        if (_outline != null)
+        if (_Outline != null)
         {
-            _outline.enabled = false;
+            _Outline.enabled = false;
         }
     }
-
     public void ShowOutline()
     {
-        if (_outline != null)
+        if (_Outline != null)
         {
-            _outline.enabled = true;
+            _Outline.enabled = true;
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Interact()
     {
-        
-       _videoPlayer = GetComponent<VideoPlayer>();
-       _videoContainer = _videoPlayer.gameObject;
-        _videoContainer = transform.GetChild(0).gameObject;
-
+        if (_VideoPlayer.isPlaying)
+        {
+            _VideoPlayer.Stop();
+        }
+        else
+        {
+            _VideoContainer.SetActive(true);
+            _VideoPlayer.Play();
+        }
     }
 
+
+    void Start()
+    {
+        _Outline = GetComponent<Outline>();
+        _Outline.enabled = false;
+        _VideoPlayer = GetComponent<VideoPlayer>();
+        _VideoContainer = transform.GetChild(0).gameObject;
+    }
 }

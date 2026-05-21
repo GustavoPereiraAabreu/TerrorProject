@@ -6,46 +6,43 @@ using UnityEngine.Events;
 public class LightSwitch : MonoBehaviour, IInteractable
 {
     [SerializeField] private bool _isOn;
-    [SerializeField] private UnityEvent OnTurnOn;
-    [SerializeField] private UnityEvent OnTurnOff;
-    private Outline _outline;
-
+    [SerializeField] private UnityEvent OnturnOn;
+    [SerializeField] private UnityEvent OnturnOff;
+    private Outline _Outline;
     private void Start()
     {
-        _outline = GetComponentInChildren<Outline>();
-        _outline.enabled = false;
+        _Outline = GetComponentInChildren<Outline>();
+        _Outline.enabled = false;
+    }
+    public void ShowOutline()
+    {
+        if (_Outline != null)
+        {
+            _Outline.enabled = true;
+        }
     }
 
     public void HideOutline()
     {
-        if (_outline != null)
+        if (_Outline != null)
         {
-            _outline.enabled = false;
+            _Outline.enabled = false;
         }
     }
 
     public void Interact()
     {
-        if(_isOn)
+        if (_isOn)
         {
-            OnTurnOff.Invoke();
+            OnturnOff.Invoke();
         }
         else
         {
-            OnTurnOn.Invoke();
+            OnturnOn.Invoke();
         }
         _isOn = !_isOn;
-        //Animação do interruptor, ligar e desligar
+        //Animação do interruptor mudando o botão
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    public void ShowOutline()
-    {
-        if (_outline != null)
-        {
-             _outline.enabled = true;
-        }
-    }
 
 }
