@@ -6,6 +6,7 @@ public class TV : MonoBehaviour, IInteractable
 {
     private VideoPlayer _videoPlayer;
     private GameObject _videoContainer;
+    private Outline _outline;
 
     public void Interact()
     {

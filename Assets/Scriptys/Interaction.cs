@@ -17,7 +17,7 @@ public class Interaction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out RaycastHit hit, _target, _interactionDistance))
+        if (!Physics.Raycast(_mainCam.transform.position, _mainCam.transform.forward, out RaycastHit hit, _interactionDistance))
         {
             // O raycast bateu em algo
 
@@ -35,6 +35,12 @@ public class Interaction : MonoBehaviour
                 _target = null;
             }
         }
+        else
+        {
+            _target?.HideOutline();
+            _target = null;
+        }
+
     }
 
     public void OnInteract(InputValue value)
