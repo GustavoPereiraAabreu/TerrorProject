@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour
 {
-    private Light _light;
-    private float _originalIntensity;
+    [SerializeField] private Light _light;
+    [SerializeField] private float _originalIntensity;
     [SerializeField] private float _intensityDecreaseRate = 0.5f;
     void Start()
     {
