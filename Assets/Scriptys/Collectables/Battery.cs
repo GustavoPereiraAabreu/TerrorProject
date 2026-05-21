@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour, ICollectable
 {
+    private Outline _outline;
+
     public void Collect()
     {
         throw new System.NotImplementedException();
