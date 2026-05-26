@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 220141470}
   - component: {fileID: 220141472}
   - component: {fileID: 220141471}
+  - component: {fileID: 220141473}
   m_Layer: 8
   m_Name: Spot Light
   m_TagString: Untagged
@@ -218,7 +219,7 @@ Light:
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
-  m_Intensity: 100
+  m_Intensity: 10
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -260,7 +261,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 100
+  m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -272,31 +273,25 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!1 &221716658 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7783721685443396354, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
-  m_PrefabInstance: {fileID: 488027759}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &221716659 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7783721685443396359, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
-  m_PrefabInstance: {fileID: 488027759}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &221716664
+--- !u!114 &220141473
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221716658}
+  m_GameObject: {fileID: 220141469}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1830b4787fc23cf41a8a1b94e5de0fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashLight
-  _light: {fileID: 220141472}
-  _originalIntensity: 10
-  _intensityDecreaseRate: 100
+  _intensityDecreaseRate: 0.5
+  _betteryDuration: 10
+--- !u!4 &221716659 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7783721685443396359, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
+  m_PrefabInstance: {fileID: 488027759}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &315531135
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,9 +559,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 220141470}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7783721685443396354, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 221716664}
     - targetCorrespondingSourceObject: {fileID: 7132943800517543344, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
       insertIndex: -1
       addedObject: {fileID: 448793093}
@@ -1716,6 +1708,37 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!1 &1911768827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911768828}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1911768828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911768827}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.46774, y: 0.47042, z: -3.69539}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1962641538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,3 +1989,4 @@ SceneRoots:
   - {fileID: 737076982}
   - {fileID: 488027759}
   - {fileID: 7191061550857872177}
+  - {fileID: 1911768828}
