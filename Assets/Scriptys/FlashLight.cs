@@ -7,7 +7,7 @@ public class FlashLight : MonoBehaviour
      private float _originalIntensity;
     [SerializeField] private float _intensityDecreaseRate = 0.5f;
     [SerializeField] private float _betteryDuration = 10;
-    private bool _lostingPower = true;//Boleana que habilita a perda de intensidade da luz, para que a lanterna não perca intensidade antes do tempo determinado
+    private bool _lostingPower;//Boleana que habilita a perda de intensidade da luz, para que a lanterna não perca intensidade antes do tempo determinado
 
     void Start()
     {
