@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; } //Singleton
     public UnityEvent OnUseBattery;
+    public UnityEvent OnUseFlashlight;
     // public GameObject Player { get => player;}
 
     //[SerializeField] private GameObject player;
