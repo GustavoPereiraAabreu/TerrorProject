@@ -5,7 +5,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; } //Singleton
 
-    public static Transform PlayerTransform { get => Instance._playerTransform; } 
+    public Transform PlayerTransform { get => _playerTransform; } 
 
     [Header("Scene References")]
     [SerializeField] private Transform _playerTransform;
