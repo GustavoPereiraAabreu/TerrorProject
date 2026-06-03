@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent _agent; //Responsavel por calcular rotas e mover
     [SerializeField] private Transform _player;
     private EnemyState _currentState;
+    [SerializeField][Range(0.5f, 5f)] private float _waitTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,13 +27,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       Vision();
+        Vision();
     }
 
     public void Vision()
     {
         bool playerInSight = Physics.Linecast(transform.position, _player.position, out RaycastHit hit);
-        if (playerInSight)
+        if (playerInSight) //Não Vejo o Player
         {
             /*
             //Aqui o inimigo para
@@ -39,9 +41,9 @@ public class Enemy : MonoBehaviour
             */
 
             if (_currentState.Equals(EnemyState.Chasing))
-           {
+            {
                 SetState(EnemyState.Idle);
-           }
+            }
 
         }
         else //Aqui Vejo o Player
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
 
             if (_currentState.Equals(EnemyState.Chasing))
                 return;
+            StopAllCoroutines(); //Caso o inimigo esteja em outro estado, para todas as coroutines
             SetState(EnemyState.Chasing);
         }
 
@@ -86,9 +89,11 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyState.Chasing:
                 // Lógica para sair do estado Chasing
+                _agent.SetDestination(lastPlayerPos); //Aqui o inimigo para de perseguir, ou seja, para o NavMeshAgent
                 break;
             case EnemyState.Patrolling:
                 // Lógica para sair do estado Patrolling
+                print("Inimigo parou de Patrulhar");
                 break;
         }
         _currentState = newState; //Aqui atualizamos o estado atual para o novo estado
@@ -96,16 +101,21 @@ public class Enemy : MonoBehaviour
         switch (_currentState)
         {
             case EnemyState.Idle:
-                _agent.isStopped = true;
+                StartCoroutine(Wait());//Inicia a coroutine para esperar um tempo antes de começar a patrulhar
                 break;
             case EnemyState.Chasing:
-                _agent.isStopped = false;
                 _agent.SetDestination(_player.position);
                 break;
             case EnemyState.Patrolling:
                 // Implementar lógica de patrulha aqui
+                print("Inimigo começou a Patrulhar");
                 break;
         }
+    }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(_waitTime);
+        SetState(EnemyState.Patrolling);
     }
 
 }

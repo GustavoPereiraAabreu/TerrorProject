@@ -230,6 +230,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1063449184}
+    - target: {fileID: 1897741120669053909, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
+      propertyPath: _waitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5490541404413858818, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
       propertyPath: m_Name
       value: NEMESIS
