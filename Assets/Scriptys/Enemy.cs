@@ -114,6 +114,7 @@ public class Enemy : MonoBehaviour
     }
     IEnumerator Wait()
     {
+        //Ainda Tenho que adicionar uma verificação para o inimigo
         yield return new WaitForSeconds(_waitTime);
         SetState(EnemyState.Patrolling);
     }
