@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f4adf491901414b9f3224ea35f8850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  _playerTransform: {fileID: 0}
   OnUseBattery:
     m_PersistentCalls:
       m_Calls: []

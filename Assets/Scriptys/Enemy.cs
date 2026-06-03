@@ -31,7 +31,34 @@ public class Enemy : MonoBehaviour
     public void Vision()
     {
         bool playerInSight = Physics.Linecast(transform.position, _player.position, out RaycastHit hit);
+        if (playerInSight)
+        {
+            /*
+            //Aqui o inimigo para
+            _agent.SetDestination(transform.position);
+            */
+
+            if (_currentState.Equals(EnemyState.Chasing))
+           {
+                SetState(EnemyState.Idle);
+           }
+
+        }
+        else //Aqui Vejo o Player
+        {
+            /*
+            //Aqui ele persegue
+            _agent.SetDestination(_player.position);
+            */
+
+            if (_currentState.Equals(EnemyState.Chasing))
+                return;
+            SetState(EnemyState.Chasing);
+        }
+
+        /*
         //Se houver um obstaculo, o inimigo não persegue o jogador
+        bool playerInSight = Physics.Linecast(transform.position, _player.position, out RaycastHit hit);
         if (playerInSight)
         {
             print("Não Vejo");
@@ -45,6 +72,7 @@ public class Enemy : MonoBehaviour
         if (!_currentState.Equals(EnemyState.Chasing)) //Se o inimigo já estiver perseguindo
             return;
         SetState(EnemyState.Chasing);
+        */
     }
 
     public void SetState(EnemyState newState)
