@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &72987664 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1086704448592265287, guid: 13452e18211fe6641b49a17c29377b53, type: 3}
-  m_PrefabInstance: {fileID: 1063449183}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &393331957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1616528392139555318, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.3
+      value: 3.52
       objectReference: {fileID: 0}
     - target: {fileID: 1616528392139555318, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -183,10 +178,14 @@ PrefabInstance:
     - target: {fileID: 1897741120669053909, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
       propertyPath: _player
       value: 
-      objectReference: {fileID: 72987664}
+      objectReference: {fileID: 1063449184}
     - target: {fileID: 5490541404413858818, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
       propertyPath: m_Name
       value: NEMESIS
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297554614310580688, guid: c866c26bfcc261f4da170ab3393d43c9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
