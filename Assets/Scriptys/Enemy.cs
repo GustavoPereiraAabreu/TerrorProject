@@ -17,20 +17,31 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _player;
     private EnemyState _currentState;
     [SerializeField][Range(0.5f, 5f)] private float _waitTime;
+    private GameObject _nape;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    IEnumerator Start()
     {
+        _nape = transform.GetChild(0).gameObject; //Pega o primeiro filho do inimigo, que é o pescoço
         _player = GameController.Instance.PlayerTransform;
         _patrolController = GameController.Instance.PatrolController;
         _agent = GetComponent<NavMeshAgent>();
+        yield return new WaitForSeconds(1); //Espera até que o NavMeshAgent esteja pronto para ser usado
         SetState(EnemyState.Patrolling);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Vision();
+        Vision();
+        /* if (!_currentState.Equals(EnemyState.Patrolling))
+            return;
+        if (_agent.remainingDistance <= _agent.stoppingDistance)
+            return;
+
+        print ("Inimigo chegou ao ponto de patrulha");
+        SetState(EnemyState.Idle);
+        */
     }
 
     public void Vision()
@@ -84,7 +95,7 @@ public class Enemy : MonoBehaviour
     public void SetState(EnemyState newState)
     {
         //O primeiro switch é para simular um OnTriggerEnter, onde o inimigo para fazer algo relacionado ao estado que ele estava, como por exemplo, se ele estava perseguindo, ele para de perseguir, ou seja, para o NavMeshAgent
-        Vector3 lastPlayerPos = _player.position;
+
         switch (_currentState)
         {
             case EnemyState.Idle:
@@ -92,7 +103,7 @@ public class Enemy : MonoBehaviour
                 break;
             case EnemyState.Chasing:
                 // Lógica para sair do estado Chasing
-                _agent.SetDestination(lastPlayerPos); //Aqui o inimigo para de perseguir, ou seja, para o NavMeshAgent
+                _agent.SetDestination(_player.position); //Aqui o inimigo para de perseguir, ou seja, para o NavMeshAgent
                 break;
             case EnemyState.Patrolling:
                 // Lógica para sair do estado Patrolling
@@ -107,20 +118,31 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(Wait());//Inicia a coroutine para esperar um tempo antes de começar a patrulhar
                 break;
             case EnemyState.Chasing:
+                _nape.SetActive(false); //Aqui o inimigo ativa o pescoço, ou seja, ele olha para o jogador
                 _agent.SetDestination(_player.position);
                 break;
             case EnemyState.Patrolling:
                 // Implementar lógica de patrulha aqui
                 print("Inimigo começou a Patrulhar");
                 _agent.SetDestination(_patrolController.MoveToNextPoint());
+                StartCoroutine(Patrolling());
                 break;
         }
     }
     IEnumerator Wait()
     {
         //Ainda Tenho que adicionar uma verificação para o inimigo
+        Debug.LogError("Temporario");
+        yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
         yield return new WaitForSeconds(_waitTime);
         SetState(EnemyState.Patrolling);
+    }
+
+    IEnumerator Patrolling()
+    {
+        // yield return new WaitForSeconds(_waitTime);
+        yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
+        SetState(EnemyState.Idle);
     }
 
 }

@@ -6,10 +6,6 @@ public class PatrolController : MonoBehaviour
     private int _currentPatrolIndex; //Ponto atual da patrulha
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
     public Vector3 GetRandomPoint()
     {
         int randomIndex = Random.Range(0, _patrolPoints.Length);
