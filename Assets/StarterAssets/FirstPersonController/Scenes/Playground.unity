@@ -219,10 +219,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolController
   _patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2015745107}
+  - {fileID: 1921263436}
+  - {fileID: 631037029}
+  - {fileID: 427012858}
 --- !u!1001 &393331957
 PrefabInstance:
   m_ObjectHideFlags: 0
