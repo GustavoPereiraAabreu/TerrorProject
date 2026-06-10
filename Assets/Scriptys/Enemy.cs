@@ -12,6 +12,7 @@ public enum EnemyState
 
 public class Enemy : MonoBehaviour
 {
+    private PatrolController _patrolController;
     private NavMeshAgent _agent; //Responsavel por calcular rotas e mover
     [SerializeField] private Transform _player;
     private EnemyState _currentState;
@@ -21,13 +22,15 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _player = GameController.Instance.PlayerTransform;
+        _patrolController = GameController.Instance.PatrolController;
         _agent = GetComponent<NavMeshAgent>();
+        SetState(EnemyState.Patrolling);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vision();
+        //Vision();
     }
 
     public void Vision()
@@ -109,6 +112,7 @@ public class Enemy : MonoBehaviour
             case EnemyState.Patrolling:
                 // Implementar lógica de patrulha aqui
                 print("Inimigo começou a Patrulhar");
+                _agent.SetDestination(_patrolController.MoveToNextPoint());
                 break;
         }
     }
