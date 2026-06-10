@@ -24,14 +24,13 @@ public class PatrolController : MonoBehaviour
         _currentPatrolIndex++;
         if (_currentPatrolIndex >= _patrolPoints.Length)
             _currentPatrolIndex = 0; // Volta para o primeiro ponto
-            return nextPoint;
-
         /*
          Se fosse fazer o mecanismo de booster do pokemon tcg
          para montar um esquema de "carrossel", teria que adicionar uma verificação de valor mínimo
          if (_currentPatrolIndex < 0)
             _currentPatrolIndex = _patrolPoints.Length - 1;
          */
+        return nextPoint;
     }
 
     //Criar método para retornar o ponto de patrulha mais próximo do inimigo
