@@ -1,5 +1,18 @@
 using System;
+using System.IO; //Imprtação para utilizar a conversão para JSON e salvar o arquivo
 using UnityEngine;
+
+[Serializable]
+public class  Save
+{
+    private int _saveId;
+
+    public Save(int saveId)
+    {
+        _saveId = saveId;
+    }
+    public int SaveId { get => _saveId; }
+}
 
 public class SaveSystem : MonoBehaviour
 {
@@ -16,22 +29,29 @@ public class SaveSystem : MonoBehaviour
         {
             SaveGame();
         }
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            LoadGame();
+        }
+    }
+
+    private void LoadGame()
+    {
+        if(!File.Exists(Application.persistentDataPath + "/save.json"))
+         return;
+
+        string json = File.ReadAllText(Application.persistentDataPath + "/save.json");
+        Save save = JsonUtility.FromJson<Save>(json);
+        GameController.Instance.OnLoadGame.Invoke();
     }
 
     private void SaveGame()
     {
-        /*
-        // Primeiro criamos um objeto com os valores que queremos salvar
-        FlashlightStatus status = new FlashlightStatus(_activeState, _batteryTimer, _lostingPower);
-        //Depois transformamos esse objeto em uma string JSON
-        string json = JsonUtility.ToJson(status);
-        JsonUtility.ToJson(json);
-
-        // Criamos o caminho do arquivo onde vamos salvar a string JSON no arquivo
-
-        //Application.persistentDataPath é uma pasta é criada automaticamente pela Unity
-        //Para Salvar dados que precisam ser persistentes entre as sessões do jogo, como configurações, progresso do jogador, etc.
-        string path = Application.persistentDataPath + "/flashlight.json";
-        System.IO.File.WriteAllText(path, json); */
+        Save save = new Save(1);
+        string json = JsonUtility.ToJson(save);
+        JsonUtility.FromJson<Save>(json);
+        string path = Application.persistentDataPath + "/save.json";
+        File.WriteAllText(path, json);
+        GameController.Instance.OnSaveGame.Invoke();
     }
 }
