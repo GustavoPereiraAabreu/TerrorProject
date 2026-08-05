@@ -4,9 +4,7 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance { get; private set; } //Singleton
-
     public Transform PlayerTransform { get => _playerTransform; } 
-
     public PatrolController PatrolController { get => _patrolController; }
 
     [Header("Scene References")]
@@ -16,6 +14,8 @@ public class GameController : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnUseBattery;
     public UnityEvent OnUseFlashlight;
+    public UnityEvent OnSaveGame; 
+    public UnityEvent OnLoadGame;
     // public GameObject Player { get => player;}
 
     //[SerializeField] private GameObject player;

@@ -1,11 +1,32 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using System.IO;
 
 public enum ActiveState
 {
     OFF, ON
+}
+
+[System.Serializable]
+public class  FlashlightStatus
+{
+    private ActiveState _activeState;
+    private float _batteryTimer;
+    private bool _lostingPower;
+
+  public FlashlightStatus(ActiveState state, float batteryTimer, bool lostingPower)
+  {
+    _activeState = state;
+    _batteryTimer = batteryTimer;
+    _lostingPower = lostingPower;
+  }
+
+    public ActiveState ActiveState { get => _activeState; }
+    public float BatteryTimer { get => _batteryTimer; }
+    public bool LostingPower { get => _lostingPower; }
 }
 
 public class FlashLight : MonoBehaviour
@@ -26,6 +47,34 @@ public class FlashLight : MonoBehaviour
         GameController.Instance.OnUseBattery.AddListener(Recharge);
         GameController.Instance.OnUseFlashlight.AddListener(TurnFlashlight);
         _batteryTimer = _betteryDuration;
+        GameController.Instance.OnSaveGame.AddListener(SaveFlashlightStatus);
+        GameController.Instance.OnLoadGame.AddListener(LoadFlashlightStatus);
+    }
+
+    private void LoadFlashlightStatus()
+    {
+        // Pega o arquivo da pasta, iremos verificar no próprio código  que adicionamos o arquivo na pasta de dados persistentes do jogo, caso não exista, o código irá criar um novo arquivo com os valores padrões da lanterna
+        string json = File.ReadAllText(Application.persistentDataPath + "/flashlight.json");
+       FlashlightStatus status = JsonUtility.FromJson<FlashlightStatus>(json);
+       _activeState = status.ActiveState;
+       _batteryTimer = status.BatteryTimer;
+       _lostingPower = status.LostingPower;
+
+    }
+    private void SaveFlashlightStatus()
+    {
+        // Primeiro criamos um objeto com os valores que queremos salvar
+        FlashlightStatus status = new FlashlightStatus(_activeState, _batteryTimer, _lostingPower);
+        //Depois transformamos esse objeto em uma string JSON
+        string json = JsonUtility.ToJson(status);
+        JsonUtility.ToJson(json);
+
+        // Criamos o caminho do arquivo onde vamos salvar a string JSON no arquivo
+
+        //Application.persistentDataPath é uma pasta é criada automaticamente pela Unity
+        //Para Salvar dados que precisam ser persistentes entre as sessões do jogo, como configurações, progresso do jogador, etc.
+        string path = Application.persistentDataPath + "/flashlight.json";
+        System.IO.File.WriteAllText(path, json);
     }
 
     private void Recharge()
